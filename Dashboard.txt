@@ -1,0 +1,63 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('report/retail', views.ecommerce_report_page, name='retail_report'),
+    path('report/marketing', views.marketing_report_page, name='marketing_report'),
+]
+
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('dashboard.urls')),
+]
+
+
+from django.shortcuts import render
+
+
+def ecommerce_report_page(request):
+   return render(request, 'retail_report.html', {})
+
+
+def marketing_report_page(request):
+   return render(request, 'marketing_report.html', {})
+
+
+var pivot = new Flexmonster({
+    container: "#pivot",
+    componentFolder: "https://cdn.flexmonster.com/",
+    height: 600,
+    toolbar: true,
+    report: {}
+});
+var pivot_charts = new Flexmonster({
+    container: "#pivot_charts",
+    componentFolder: "https://cdn.flexmonster.com/",
+    height: 600,
+    toolbar: true,
+    report: {}
+});
+
+
+var pivot = new Flexmonster({
+    container: "#pivot",
+    componentFolder: "https://cdn.flexmonster.com/",
+    height: 600,
+    toolbar: true,
+    report: {
+        "dataSource": {
+            "type": "api",
+            "url": "http://localhost:9204/mongo", // the url where our connector is running
+            "index": "marketing" // specify the collection’s name
+        },
+        "slice": {}
+    }
+});
+
+
+
+
